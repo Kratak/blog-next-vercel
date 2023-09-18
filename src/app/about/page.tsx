@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import AccountsList from "@/app/about/Accounts";
 
 export default function Home() {
   return (
