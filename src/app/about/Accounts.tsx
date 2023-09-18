@@ -15,7 +15,7 @@ export default async function AccountsList() {
             <>
                     {accounts.map((ticket) => (
                         <div key={ticket.id} className="card my-5">
-                                        <h3>{ticket.username}</h3>
+                                        <h3>Name: {ticket.username}</h3>
                         </div>
                     ))}
                     {accounts.length === 0 && (
