@@ -1,7 +1,10 @@
 import {sql} from "@vercel/postgres";
 
 async function getArticlesDescription() {
-    const {rows} = await sql`SELECT * FROM articles ORDER BY publish_date DESC;`;
+    const {rows} = await sql`
+        SELECT is_public, publish_date, custom_url, article_title, article_short_description 
+        FROM articles 
+        ORDER BY publish_date DESC;`;
     return rows
 
 }

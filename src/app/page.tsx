@@ -1,7 +1,11 @@
 import {sql} from "@vercel/postgres";
 
 async function getArticles() {
-    const {rows} = await sql`SELECT * FROM articles ORDER BY publish_date DESC LIMIT 10;`;
+    const {rows} = await sql`
+        SELECT is_public, publish_date, custom_url, article_title, article_short_description 
+        FROM articles 
+        ORDER BY publish_date DESC 
+        LIMIT 10;`;
     return rows
 
 }
@@ -22,7 +26,7 @@ const Articles = async () => {
                     <div>Opublikowano: {new Date(article.publish_date).toISOString()}</div>
                     <div>Autor: Dadgrammer</div>
                     <br/>
-                    <div dangerouslySetInnerHTML={{__html: article.article_wyswig}}/>
+                    <div>{article.article_short_description}</div>
                     <div>___</div>
                     <br/>
                 </div>
