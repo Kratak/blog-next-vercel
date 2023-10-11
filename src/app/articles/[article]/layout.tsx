@@ -19,6 +19,19 @@ export default async function ArticleLayout({params: {article: articleUrl}}: {
     params: { article: string }
 }) {
     const data = await getArticleData(articleUrl)
+    if (data.length === 0) {
+        return (
+            <html lang="en">
+            <body className={inter.className}>
+            <main className="flex min-h-screen flex-col items-center p-24">
+                <a href="/">Strona główna</a>
+                <h1 className={`mb-3 text-4xl font-semibold mb-8`}>Brak artykułu</h1>
+                <a href="/articles">Pozostałe posty</a>
+            </main>
+            </body>
+            </html>
+        )
+    }
     return (
         <html lang="en">
         <title>{data[0].article_title || 'Brak postu'}</title>
