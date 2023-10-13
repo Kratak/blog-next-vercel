@@ -1,4 +1,5 @@
 import {sql} from "@vercel/postgres";
+import {Suspense} from "react";
 
 async function getArticles() {
     const {rows} = await sql`
@@ -51,7 +52,9 @@ export default function Home() {
             </div>
 
             <div>
-                <Articles/>
+                <Suspense fallback={<div>Ładowanie postów...</div>}>
+                    <Articles/>
+                </Suspense>
             </div>
 
             <div>
