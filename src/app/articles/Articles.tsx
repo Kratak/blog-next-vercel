@@ -1,8 +1,17 @@
-import {sql} from "@vercel/postgres";
+import {QueryResult, sql} from "@vercel/postgres";
 
-async function getArticlesDescription() {
-    const {rows} = await sql`
-        SELECT is_public, publish_date, custom_url, article_title, article_short_description 
+interface ArticleResponse {
+    is_public: boolean,
+    article_id: number,
+    custom_url: string,
+    article_title: string,
+    publish_date: Date,
+    article_short_description: string
+}
+
+async function getArticlesDescription(): Promise<Array<ArticleResponse>> {
+    const {rows}: QueryResult<ArticleResponse> = await sql`
+        SELECT is_public, article_id, publish_date, custom_url, article_title, article_short_description 
         FROM articles 
         ORDER BY publish_date DESC;`;
     return rows
